@@ -1,4 +1,5 @@
 use crate::todo::commands::create_todo;
+use crate::todo::commands::get_all_todo;
 mod sys;
 mod todo;
 
@@ -13,7 +14,8 @@ pub fn run() {
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![
             greet,
-            create_todo
+            create_todo,
+            get_all_todo
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
