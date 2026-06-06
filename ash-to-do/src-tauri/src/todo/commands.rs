@@ -12,25 +12,27 @@ pub fn create_todo(name: &str) -> Result<Value, String> {
             "columns": [
                 {{
                     "name": "todo",
-                    "color": "ffffff",
+                    "color": "bg-blue-200",
                     "tasks": [
                         {{
                             "title": "Welcome to todo",
                             "description": "Todo",
                             "createdAt": "",
-                            "deadLineAt": ""
+                            "deadLineAt": "",
+                            "color": "bg-blue-300"
                         }}
                     ]
                 }},
                 {{
                     "name": "in progress",
-                    "color": "f6ffff",
+                    "color": "bg-blue-200",
                     "tasks": [
                         {{
                             "title": "Welcome to todo",
                             "description": "Todo",
                             "createdAt": "",
-                            "deadLineAt": ""
+                            "deadLineAt": "",
+                            "color": "bg-blue-300"
                         }}
                     ]
                 }}

@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
+import TodoTab from "../components/todoTab";
 
 interface TodoColumnTask {
   title: string;
   description: string;
   createdAt: string;
   deadLineAt: string;
+  color: string;
 }
 
 interface TodoColumn {
   name: string;
-  colors: string;
+  color: string;
   tasks: [TodoColumnTask];
 }
 
@@ -23,6 +25,7 @@ export default function TodoMain() {
 
   const [todo, setTodo] = useState<Todo[] | null>(null);
   const [load, setLoad] = useState<boolean>(false);
+  const [todoKey, setTodoKey] = useState<number>(0)
 
   useEffect(() => {
     (async () => {
@@ -44,13 +47,22 @@ export default function TodoMain() {
   }
 
   return (
-    <div>
-      <button onClick={() => {create_todo()}}>Add todo</button>
-      {
-        todo?.map((e, key) => (
-          <>{e.name}</>
-        ))
-      }
+    <div className="flex flex-col h-full">
+      <div className="flex-2">
+        <button onClick={() => {create_todo()}}>Add todo</button>
+      </div>
+      <div className="flex-1">
+        {
+          todo?.map((e, key) => (
+            <button key={key}>{e.name}</button>
+          ))
+        }
+      </div>
+      <div className="flex-20">
+        {
+          todo != null && todo?.[todoKey] && <TodoTab {...todo[todoKey]} />
+        }
+      </div>
     </div>
   );
 }
