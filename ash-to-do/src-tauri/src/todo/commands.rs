@@ -14,22 +14,26 @@ pub fn create_todo(name: &str) -> Result<Value, String> {
                     "name": "todo",
                     "color": "ffffff",
                     "tasks": [
-                        "title": "Welcome to todo",
-                        "description": "Todo",
-                        "createdAt": "",
-                        "deadLineAt": ""
+                        {{
+                            "title": "Welcome to todo",
+                            "description": "Todo",
+                            "createdAt": "",
+                            "deadLineAt": ""
+                        }}
                     ]
                 }},
                 {{
                     "name": "in progress",
                     "color": "f6ffff",
                     "tasks": [
-                        "title": "Welcome to todo",
-                        "description": "Todo",
-                        "createdAt": "",
-                        "deadLineAt": ""
+                        {{
+                            "title": "Welcome to todo",
+                            "description": "Todo",
+                            "createdAt": "",
+                            "deadLineAt": ""
+                        }}
                     ]
-                }},
+                }}
             ]
         }}
     "#, name);
@@ -45,6 +49,9 @@ pub fn get_all_todo() -> Result<Vec<Value>, String> {
     let mut todos = Vec::new();
 
     for path in paths {
+        if !path.ends_with(".json") {
+            continue;
+        }
         let content = std::fs::read_to_string(&path).map_err(|e| e.to_string())?;
         let v: Value = serde_json::from_str(&content).map_err(|e| e.to_string())?;
         todos.push(v);
